@@ -163,7 +163,7 @@ function downloadCsv(){
 async function init(){
   ['locationSelect','locationMeta','variableSelect','showBand','showMean','chartHeading','chartSubheading','status'].forEach(id=>els[id]=$(id));
   if(!window.L||!window.Plotly){setStatus('Nepodařilo se načíst Leaflet nebo Plotly. Ověřte připojení k internetu.',true);return;}
-  state.map=L.map('map',{preferCanvas:true,zoomControl:true}).setView([49.7,15.3],7);
+  state.map=L.map('map',{preferCanvas:false,zoomControl:true}).setView([49.7,15.3],7);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(state.map);
   try{
     const entries=await Promise.all([...Object.entries(CONFIG.layers).map(async([k,c])=>{const r=await fetch(c.url);if(!r.ok)throw Error(`HTTP ${r.status}: ${c.url}`);return [k,await r.json()];}),fetch('data/series.json').then(r=>{if(!r.ok)throw Error(`HTTP ${r.status}: series.json`);return r.json();})]);

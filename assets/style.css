@@ -144,3 +144,75 @@ html, body { height:100%; width:100%; overflow:hidden; }
 .leaflet-tooltip-left:before { right:0; margin-right:-12px; top:50%; margin-top:-6px; border-left-color:white; }
 .leaflet-tooltip-right:before { left:0; margin-left:-12px; top:50%; margin-top:-6px; border-right-color:white; }
 .leaflet-container .leaflet-overlay-pane svg { overflow:visible; }
+
+
+/* LAPV 1.3: compact, responsive catalogue sheet shown when a flood polygon is selected. */
+.map-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.catalog-action{background:#e9f5fb;color:#136d96;border-color:#b7d9e9;font-weight:700}
+.catalog-action:hover{background:#d9edf7}
+.catalog-layer-hint{margin-top:13px;font-size:11px}
+.catalog-dialog{position:fixed;inset:0;margin:auto;width:min(1040px,calc(100vw - 32px));max-width:1040px;max-height:calc(100vh - 34px);max-height:calc(100dvh - 34px);padding:0;border:1px solid #d7e4eb;border-radius:16px;background:#fff;color:#19354a;box-shadow:0 22px 70px #061c3450}
+.catalog-dialog[open]{display:flex;flex-direction:column}
+.catalog-dialog::backdrop{background:rgba(8,24,39,.62);backdrop-filter:blur(2px)}
+.catalog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:18px 24px 15px;border-bottom:1px solid #e6edf1;flex:0 0 auto}
+.catalog-heading{min-width:0}
+.catalog-heading h2{font-size:22px;line-height:1.2;letter-spacing:-.5px;margin:5px 0 3px}
+.catalog-meta{margin:0;color:#718999;font-size:12px}
+.catalog-toolbar{display:flex;gap:8px;align-items:center}
+.catalog-toolbar button:disabled{opacity:.4;cursor:not-allowed}
+.catalog-close{font:inherit;color:#567386;background:#f1f5f7;border:1px solid #e2eaef;border-radius:8px;font-size:23px;line-height:1;display:grid;place-items:center;width:35px;height:35px;cursor:pointer}
+.catalog-close:hover{background:#e6eef2}
+.catalog-body{padding:18px 24px 20px;overflow:auto;overscroll-behavior:contain;min-height:0}
+.catalog-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.catalog-stat{background:#f3f7f9;border:1px solid #e6edf2;border-radius:9px;padding:12px 14px;min-width:0}
+.catalog-stat-value{font-size:22px;letter-spacing:-.45px;font-weight:760;line-height:1.25;color:#17364f;font-variant-numeric:tabular-nums;white-space:nowrap}
+.catalog-stat-value small{font-size:11px;color:#5b7585;font-weight:600;letter-spacing:0}
+.catalog-stat-label{font-size:11px;color:#698397;margin-top:5px;font-weight:600}
+.catalog-section-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.catalog-section-title h3{font-size:14px;margin:0;font-weight:760;color:#1b4159}
+.catalog-section-title span{font-size:11px;color:#7891a3}
+.catalog-table-wrap{overflow-x:auto;border:1px solid #dde7ed;border-radius:10px;scrollbar-color:#bfd1dc transparent;scrollbar-width:thin}
+.catalog-table{border-collapse:separate;border-spacing:0;width:100%;min-width:780px;text-align:right;font-variant-numeric:tabular-nums}
+.catalog-table th,.catalog-table td{padding:9px 10px;border-bottom:1px solid #e8eef2;vertical-align:middle;font-size:12px;white-space:nowrap}
+.catalog-table thead th{background:#f1f6f9;color:#426178;font-size:11px;position:sticky;top:0;z-index:2;border-bottom:1px solid #cedfe8}
+.catalog-table thead th:first-child{text-align:left;min-width:156px}
+.catalog-table tbody tr:last-child th,.catalog-table tbody tr:last-child td{border-bottom:0}
+.catalog-table tbody tr:nth-child(even) th,.catalog-table tbody tr:nth-child(even) td{background:#fafcfd}
+.catalog-table tbody tr:hover th,.catalog-table tbody tr:hover td{background:#eff7fa}
+.catalog-table tbody th{text-align:left;font-weight:600;color:#183c53}
+.catalog-table tbody th:first-child{position:sticky;left:0;z-index:1;background:#fff;box-shadow:1px 0 #e8eff3}
+.catalog-table tbody tr:nth-child(even) th:first-child{background:#fafcfd}
+.catalog-table thead th:first-child{position:sticky;left:0;z-index:3;box-shadow:1px 0 #e4edf1}
+.cat-metric,.cat-mean{display:block;line-height:1.25}
+.cat-mean{font-size:12px;font-weight:760;color:#24465c}
+.cat-range,.cat-unit,.cat-scenario-head small{display:block;font-size:10px;color:#7d919f;font-weight:500;margin-top:4px;line-height:1.2}
+.cat-scenario-head strong{font-size:12px;color:#295471}
+.cat-baseline,.cat-ref-head{background:#eaf4f9!important}
+.cat-baseline{border-left:1px solid #d1e3ed;border-right:1px solid #d1e3ed}
+.catalog-null{margin-top:12px;color:#446278;font-size:11px;line-height:1.55}
+.catalog-footnote{margin:9px 0 0;font-size:11px;line-height:1.65;color:#718a99}
+.catalog-loading,.catalog-empty{margin:0;padding:30px 18px;text-align:center;border:1px dashed #cbdce5;border-radius:9px;background:#f7fafb;color:#5c7b90;font-size:13px;line-height:1.6}
+@media(max-width:780px){
+ .catalog-dialog{width:calc(100vw - 14px);max-height:calc(100dvh - 14px);border-radius:10px}
+ .catalog-head{padding:14px;align-items:center}
+ .catalog-heading h2{font-size:19px}
+ .catalog-toolbar{gap:5px}.catalog-toolbar .small-button{padding:8px}
+ .catalog-body{padding:13px}
+ .catalog-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .catalog-stat{padding:10px}.catalog-stat-value{font-size:19px}
+}
+@media(max-width:700px){.map-actions{gap:5px}.map-actions .small-button{padding:7px;font-size:10px}}
+@media print{
+ @page{size:landscape;margin:12mm}
+ body{background:white!important}
+ .app-shell{display:none!important}
+ .catalog-dialog{position:static!important;display:block!important;width:100%!important;max-height:none!important;overflow:visible!important;box-shadow:none!important;border:0!important;margin:0!important}
+ .catalog-body{overflow:visible!important;padding:12px 0!important}
+ .catalog-toolbar{display:none!important}
+ .catalog-table-wrap{overflow:visible!important}
+ .catalog-table{min-width:0!important}
+ .catalog-table th,.catalog-table td{padding:6px!important}
+}
+
+.catalog-swipe-hint{display:none;margin:0 0 8px;font-size:11px;color:#40758d;font-weight:600}
+@media(max-width:780px){.catalog-swipe-hint{display:block}}

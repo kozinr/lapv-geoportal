@@ -39,12 +39,35 @@ function syncVisualSizes(refit=false){
   });
 }
 
+
+function ringAreaAbs(ring){
+  if(!Array.isArray(ring)||ring.length<3)return 0;
+  let sum=0;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++) {
+    const a=ring[j], b=ring[i];
+    sum += (Number(a[0])||0)*(Number(b[1])||0) - (Number(b[0])||0)*(Number(a[1])||0);
+  }
+  return Math.abs(sum/2);
+}
+function featureApproxArea(feature){
+  const g=feature?.geometry;
+  if(!g)return 0;
+  if(g.type==='Polygon') return (g.coordinates||[]).reduce((acc,ring,idx)=>acc + (idx===0?1:-1)*ringAreaAbs(ring),0);
+  if(g.type==='MultiPolygon') return (g.coordinates||[]).reduce((tot,poly)=>tot + (poly||[]).reduce((acc,ring,idx)=>acc + (idx===0?1:-1)*ringAreaAbs(ring),0),0);
+  return 0;
+}
+function sortFeaturesForClickPriority(geo){
+  const sorted={...geo};
+  sorted.features=(geo.features||[]).slice().sort((a,b)=>featureApproxArea(b)-featureApproxArea(a));
+  return sorted;
+}
+
 function defaultPolygonStyle(){return {color:'#237bb2',weight:1.6,fillColor:'#429cc5',fillOpacity:.16};}
 function selectedPolygonStyle(){return {color:'#e96b22',weight:3.2,fillColor:'#f8ab5b',fillOpacity:.34};}
 function mapPopup(feature){let p=feature.properties||{};return `<div class="popup-title">${safe(nameOf(feature))}</div><div class="popup-id">ID_Generel: <strong>${safe(p.ID_Generel)}</strong></div>${p.TOK?`<div>Tok: ${safe(p.TOK)}</div>`:''}<div style="margin-top:7px;color:#147baf">Kliknutím vyberete lokalitu pro graf.</div>`;}
 function addMapLayer(key, geo){
   if(key==='povodi'){
-    const group=L.geoJSON(geo,{style:defaultPolygonStyle(),onEachFeature:(feature,layer)=>{
+    const group=L.geoJSON(sortFeaturesForClickPriority(geo),{style:defaultPolygonStyle(),onEachFeature:(feature,layer)=>{
       layer.bindTooltip(safe(nameOf(feature)),{sticky:true});
       layer.bindPopup(mapPopup(feature));
       layer.on('click',()=>selectLocation(feature.properties.ID_Generel,true));
@@ -55,7 +78,7 @@ function addMapLayer(key, geo){
     state.layers[key]=group;
     state.baseBounds=group.getBounds();
   }else if(key==='zatopy'){
-    state.layers[key]=L.geoJSON(geo,{style:defaultZatopaStyle(),onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f))+' \u00b7 katalogov\u00fd list',{sticky:true});l.on('click',()=>{selectLocation(f.properties.ID_Generel,true);openCatalog(f.properties.ID_Generel);});}});
+    state.layers[key]=L.geoJSON(sortFeaturesForClickPriority(geo),{style:defaultZatopaStyle(),onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f))+' \u00b7 katalogov\u00fd list',{sticky:true});l.on('click',()=>{selectLocation(f.properties.ID_Generel,true);openCatalog(f.properties.ID_Generel);});}});
   }else if(key==='plochy'){
     state.layers[key]=L.geoJSON(geo,{style:{color:'#8b5bba',weight:1.2,fillColor:'#aa7ed0',fillOpacity:.28},onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f)),{sticky:true});l.on('click',()=>selectLocation(f.properties.ID_Generel,true));}});
   }else{
@@ -162,7 +185,7 @@ function readUrlOptions(){
   const q=new URLSearchParams(location.search);return {id:q.get('id'),variable:q.get('var'),scenarios:q.get('sim'),periods:q.get('per')};
 }
 function setChoices(id,values){const set=new Set(values);document.querySelectorAll(`#${id} input`).forEach(el=>{el.checked=set.has(el.value);});}
-function resetAll(){setChoices('scenarioChecks',['SSP245','SSP370','SSP585']);setChoices('periodChecks',['2050']);els.variableSelect.value='P_delta';els.showBand.checked=true;els.showMean.checked=true;selectLocation(state.geo.povodi.features[0].properties.ID_Generel);fitHome();}
+function resetAll(){setChoices('scenarioChecks',['SSP245']);setChoices('periodChecks',['2050']);els.variableSelect.value='P_delta';els.showBand.checked=true;els.showMean.checked=true;selectLocation(state.geo.povodi.features[0].properties.ID_Generel);fitHome();}
 function downloadCsv(){
   const combos=visibleCombinationData();if(!combos.length){setStatus('Pro export vyberte alespoň jeden scénář a horizont.',true);return;}
   const lines=['ID_Generel,NAZEV_NADR,SIM,PER,Month,var,val_mean,val_25,val_75,val_min,val_max'];

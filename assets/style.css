@@ -229,7 +229,7 @@ html, body { height:100%; width:100%; overflow:hidden; }
 .partner-logo:hover {border-color:#a1c9d9; background:#f7fafc;}
 .partner-logo img {display:block; max-width:100%; height:auto; object-fit:contain;}
 .partner-mzp {flex-direction:column; min-height:76px; gap:2px;}
-.partner-mzp img {max-height:61px; max-width:205px;}
+.partner-mzp img {max-height:70px; max-width:230px;}
 .partner-caption {font-size:10px; color:#526b7d; text-align:center;}
 .partner-mzp img + .partner-caption {font-size:0; line-height:0;}
 .partner-mzp img[style*="display: none"] + .partner-caption {font-size:11px; line-height:1.4; font-weight:600;}
@@ -243,7 +243,7 @@ html, body { height:100%; width:100%; overflow:hidden; }
   .partner-logos {display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px;}
   .partner-logo {min-height:58px;padding:5px;}
   .partner-mzp {min-height:58px;}
-  .partner-mzp img {max-height:40px;}
+  .partner-mzp img {max-height:46px; max-width:100%;}
   .partner-vuv img {max-height:49px;}
   .partner-tacr {gap:4px;flex-direction:column;}
   .partner-tacr img {height:38px;width:38px;}

@@ -26,6 +26,19 @@ function nameOf(f){const p=f.properties||{};return p.NAZEV_NADR||p.NAZEV||`Lokal
 function selectedPeriods(){return selections('periodChecks');}
 function selectedScenarios(){return selections('scenarioChecks');}
 function fitHome(){if(state.baseBounds && state.baseBounds.isValid()) state.map.fitBounds(state.baseBounds.pad(.07));}
+let pendingResizeFrame = 0;
+function syncVisualSizes(refit=false){
+  if(pendingResizeFrame)cancelAnimationFrame(pendingResizeFrame);
+  pendingResizeFrame=requestAnimationFrame(()=>{
+    pendingResizeFrame=0;
+    if(state.map)state.map.invalidateSize({pan:false});
+    if(refit)fitHome();
+    if(state.loaded && window.Plotly && $('chart')?._fullLayout){
+      try{Plotly.Plots.resize($('chart'));}catch(e){console.warn('Plotly resize:',e);}
+    }
+  });
+}
+
 function defaultPolygonStyle(){return {color:'#237bb2',weight:1.6,fillColor:'#429cc5',fillOpacity:.16};}
 function selectedPolygonStyle(){return {color:'#e96b22',weight:3.2,fillColor:'#f8ab5b',fillOpacity:.34};}
 function mapPopup(feature){let p=feature.properties||{};return `<div class="popup-title">${safe(nameOf(feature))}</div><div class="popup-id">ID_Generel: <strong>${safe(p.ID_Generel)}</strong></div>${p.TOK?`<div>Tok: ${safe(p.TOK)}</div>`:''}<div style="margin-top:7px;color:#147baf">Kliknutím vyberete lokalitu pro graf.</div>`;}
@@ -167,7 +180,13 @@ async function init(){
     if(q.variable && CONFIG.variables[q.variable])els.variableSelect.value=q.variable;
     const id=features.find(f=>String(f.properties.ID_Generel)===String(q.id))?.properties.ID_Generel ?? features[0].properties.ID_Generel;
     selectLocation(id);fitHome();
-    setTimeout(()=>{state.map.invalidateSize();Plotly.Plots.resize($('chart'));},100);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>syncVisualSizes(true)));
+    if(window.ResizeObserver){
+      const observer=new ResizeObserver(()=>syncVisualSizes());
+      observer.observe($('map'));
+      observer.observe($('chart'));
+      state.resizeObserver=observer;
+    }
   }catch(e){console.error(e);setStatus(`Chyba při načítání dat: ${e.message}. Otevřete aplikaci přes webový server / GitHub Pages.`,true);}
   els.locationSelect.addEventListener('change',e=>selectLocation(e.target.value));
   document.querySelectorAll('#scenarioChecks input,#periodChecks input').forEach(i=>i.addEventListener('change',()=>{renderPlot();updateUrl();}));
@@ -175,6 +194,6 @@ async function init(){
   els.showBand.addEventListener('change',renderPlot);els.showMean.addEventListener('change',renderPlot);
   document.querySelectorAll('#layerChecks input').forEach(i=>i.addEventListener('change',()=>{const layer=state.layers[i.dataset.layer];if(!layer)return;if(i.checked)layer.addTo(state.map);else state.map.removeLayer(layer);if(state.layers.povodi&&state.map.hasLayer(state.layers.povodi))highlight();}));
   $('fitMap').addEventListener('click',fitHome);$('resetAll').addEventListener('click',resetAll);$('downloadCsv').addEventListener('click',downloadCsv);
-  window.addEventListener('resize',()=>{if(state.map)state.map.invalidateSize();if(state.loaded)Plotly.Plots.resize($('chart'));});
+  window.addEventListener('resize',()=>syncVisualSizes());
 }
 window.addEventListener('DOMContentLoaded',init);

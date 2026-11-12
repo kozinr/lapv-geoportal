@@ -1,0 +1,1610 @@
+{
+  "schema_version": "1.0.0",
+  "dataset": "lapv_hydrologie",
+  "reference_period": "1991-2020",
+  "id_field": "id_generel",
+  "units": {
+    "vpot_mil_m3": "mil. m3",
+    "hladina_m_n_m": "m n. m.",
+    "vyska_hraze_m": "m",
+    "p_mm": "mm",
+    "t_c": "degC",
+    "et_mm": "mm",
+    "qa_m3s": "m3/s",
+    "mzp_m3s": "m3/s",
+    "nul_var_m3s": "m3/s",
+    "qn_m3s": "m3/s",
+    "odber_m3s": "m3/s"
+  },
+  "name_index": {
+    "brezi": 2,
+    "doubravcany": 3,
+    "horicka": 5,
+    "jangelec": 6,
+    "lukavice": 7,
+    "ostruzno": 8,
+    "pisecna": 10,
+    "rychmburk": 11,
+    "spacice": 12,
+    "tuchoraz": 13,
+    "zamberk": 14,
+    "batelov": 16,
+    "belkovice": 17,
+    "blazice": 18,
+    "brodce": 20,
+    "cucice": 21,
+    "dlouhaloucka": 22,
+    "dolnibolikov": 23,
+    "hanusovice": 24,
+    "hornikounice": 25,
+    "chotebudice": 27,
+    "kacenka": 28,
+    "kurimskejestrabi": 29,
+    "otaslavice": 30,
+    "plavec": 31,
+    "podlesnymlyn": 32,
+    "radkovy": 33,
+    "rajnochovicekosovy": 34,
+    "rajnochovice": 34,
+    "rychtarov": 35,
+    "smilov": 36,
+    "strizov": 37,
+    "sternberk": 38,
+    "terezin": 39,
+    "usobrno": 40,
+    "vosovec": 42,
+    "vysocany": 43,
+    "zelesice": 44,
+    "dvorecky": 50,
+    "hlubockapila": 51,
+    "chaloupky": 52,
+    "kryry": 53,
+    "metikalov": 54,
+    "poutnov": 55,
+    "skrivan": 56,
+    "turany": 58,
+    "amerika": 59,
+    "hredleii": 66,
+    "chumava": 68,
+    "javornice": 69,
+    "kladruby": 70,
+    "klestenice": 72,
+    "nabdin": 76,
+    "straziste": 80,
+    "sipin": 82,
+    "vseruby": 85,
+    "byciskala": 87,
+    "mnichov": 88,
+    "javornik": 89,
+    "skuhrov": 90,
+    "ledny": 91,
+    "zahorovice": 92
+  },
+  "records": {
+    "2": {
+      "id_generel": 2,
+      "name": "Březí",
+      "name_key": "brezi",
+      "vpot_mil_m3": 7.3,
+      "hladina_m_n_m": 359.0,
+      "vyska_hraze_m": 39.0,
+      "p_mm": 681.3,
+      "t_c": 8.6,
+      "et_mm": 527.2,
+      "qa_m3s": 0.3,
+      "mzp_m3s": 0.007,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.192,
+        "pt995": 0.158
+      },
+      "odber_m3s": {
+        "pt95": 0.185,
+        "pt995": 0.151
+      }
+    },
+    "3": {
+      "id_generel": 3,
+      "name": "Doubravčany",
+      "name_key": "doubravcany",
+      "vpot_mil_m3": 4.8,
+      "hladina_m_n_m": 319.0,
+      "vyska_hraze_m": 26.0,
+      "p_mm": 635.1,
+      "t_c": 8.6,
+      "et_mm": 511.3,
+      "qa_m3s": 0.411,
+      "mzp_m3s": 0.087,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.27,
+        "pt995": 0.215
+      },
+      "odber_m3s": {
+        "pt95": 0.183,
+        "pt995": 0.128
+      }
+    },
+    "5": {
+      "id_generel": 5,
+      "name": "Hořička",
+      "name_key": "horicka",
+      "vpot_mil_m3": 12.1,
+      "hladina_m_n_m": 376.0,
+      "vyska_hraze_m": 23.0,
+      "p_mm": 748.3,
+      "t_c": 8.3,
+      "et_mm": 498.0,
+      "qa_m3s": 0.437,
+      "mzp_m3s": 0.017,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.398,
+        "pt995": 0.352
+      },
+      "odber_m3s": {
+        "pt95": 0.381,
+        "pt995": 0.335
+      }
+    },
+    "6": {
+      "id_generel": 6,
+      "name": "Jangelec",
+      "name_key": "jangelec",
+      "vpot_mil_m3": 7.8,
+      "hladina_m_n_m": 282.0,
+      "vyska_hraze_m": 15.0,
+      "p_mm": 702.7,
+      "t_c": 8.2,
+      "et_mm": 520.5,
+      "qa_m3s": 2.292,
+      "mzp_m3s": 0.55,
+      "nul_var_m3s": {
+        "pt95": 0.017,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 1.26,
+        "pt995": 0.948
+      },
+      "odber_m3s": {
+        "pt95": 0.71,
+        "pt995": 0.398
+      }
+    },
+    "7": {
+      "id_generel": 7,
+      "name": "Lukavice",
+      "name_key": "lukavice",
+      "vpot_mil_m3": 14.1,
+      "hladina_m_n_m": 478.0,
+      "vyska_hraze_m": 60.0,
+      "p_mm": 1013.5,
+      "t_c": 7.0,
+      "et_mm": 511.0,
+      "qa_m3s": 0.245,
+      "mzp_m3s": 0.05,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.257,
+        "pt995": 0.233
+      },
+      "odber_m3s": {
+        "pt95": 0.207,
+        "pt995": 0.183
+      }
+    },
+    "8": {
+      "id_generel": 8,
+      "name": "Ostružno",
+      "name_key": "ostruzno",
+      "vpot_mil_m3": 1.8,
+      "hladina_m_n_m": 362.0,
+      "vyska_hraze_m": 13.0,
+      "p_mm": 772.7,
+      "t_c": 8.0,
+      "et_mm": 528.1,
+      "qa_m3s": 1.457,
+      "mzp_m3s": 0.196,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.48,
+        "pt995": 0.322
+      },
+      "odber_m3s": {
+        "pt95": 0.284,
+        "pt995": 0.126
+      }
+    },
+    "10": {
+      "id_generel": 10,
+      "name": "Písečná",
+      "name_key": "pisecna",
+      "vpot_mil_m3": 4.9,
+      "hladina_m_n_m": 368.0,
+      "vyska_hraze_m": 20.0,
+      "p_mm": 756.0,
+      "t_c": 8.0,
+      "et_mm": 512.7,
+      "qa_m3s": 0.107,
+      "mzp_m3s": 0.021,
+      "nul_var_m3s": {
+        "pt95": 0.001,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.112,
+        "pt995": 0.094
+      },
+      "odber_m3s": {
+        "pt95": 0.091,
+        "pt995": 0.073
+      }
+    },
+    "11": {
+      "id_generel": 11,
+      "name": "Rychmburk",
+      "name_key": "rychmburk",
+      "vpot_mil_m3": 7.9,
+      "hladina_m_n_m": 438.0,
+      "vyska_hraze_m": 52.0,
+      "p_mm": 779.4,
+      "t_c": 7.6,
+      "et_mm": 500.1,
+      "qa_m3s": 0.573,
+      "mzp_m3s": 0.063,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.453,
+        "pt995": 0.397
+      },
+      "odber_m3s": {
+        "pt95": 0.39,
+        "pt995": 0.334
+      }
+    },
+    "12": {
+      "id_generel": 12,
+      "name": "Spačice",
+      "name_key": "spacice",
+      "vpot_mil_m3": 5.0,
+      "hladina_m_n_m": 348.0,
+      "vyska_hraze_m": 41.0,
+      "p_mm": 769.5,
+      "t_c": 8.1,
+      "et_mm": 529.0,
+      "qa_m3s": 1.518,
+      "mzp_m3s": 0.204,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.736,
+        "pt995": 0.548
+      },
+      "odber_m3s": {
+        "pt95": 0.532,
+        "pt995": 0.344
+      }
+    },
+    "13": {
+      "id_generel": 13,
+      "name": "Tuchoraz",
+      "name_key": "tuchoraz",
+      "vpot_mil_m3": 8.7,
+      "hladina_m_n_m": 256.0,
+      "vyska_hraze_m": 24.0,
+      "p_mm": 633.6,
+      "t_c": 8.9,
+      "et_mm": 516.1,
+      "qa_m3s": 0.101,
+      "mzp_m3s": 0.022,
+      "nul_var_m3s": {
+        "pt95": 0.003,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.105,
+        "pt995": 0.1
+      },
+      "odber_m3s": {
+        "pt95": 0.083,
+        "pt995": 0.078
+      }
+    },
+    "14": {
+      "id_generel": 14,
+      "name": "Žamberk",
+      "name_key": "zamberk",
+      "vpot_mil_m3": 24.4,
+      "hladina_m_n_m": 480.0,
+      "vyska_hraze_m": 44.0,
+      "p_mm": 939.9,
+      "t_c": 7.3,
+      "et_mm": 504.0,
+      "qa_m3s": 0.391,
+      "mzp_m3s": 0.058,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.425,
+        "pt995": 0.402
+      },
+      "odber_m3s": {
+        "pt95": 0.367,
+        "pt995": 0.344
+      }
+    },
+    "16": {
+      "id_generel": 16,
+      "name": "Batelov",
+      "name_key": "batelov",
+      "vpot_mil_m3": 1.71,
+      "hladina_m_n_m": 553.3,
+      "vyska_hraze_m": 12.0,
+      "p_mm": 701.8,
+      "t_c": 7.3,
+      "et_mm": 457.3,
+      "qa_m3s": 0.203,
+      "mzp_m3s": 0.099,
+      "nul_var_m3s": {
+        "pt95": 0.027,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.16,
+        "pt995": 0.145
+      },
+      "odber_m3s": {
+        "pt95": 0.061,
+        "pt995": 0.046
+      }
+    },
+    "17": {
+      "id_generel": 17,
+      "name": "Bělkovice",
+      "name_key": "belkovice",
+      "vpot_mil_m3": 47.4,
+      "hladina_m_n_m": 425.0,
+      "vyska_hraze_m": 110.0,
+      "p_mm": 744.1,
+      "t_c": 7.5,
+      "et_mm": 471.3,
+      "qa_m3s": 0.408,
+      "mzp_m3s": 0.054,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.432,
+        "pt995": 0.421
+      },
+      "odber_m3s": {
+        "pt95": 0.378,
+        "pt995": 0.367
+      }
+    },
+    "18": {
+      "id_generel": 18,
+      "name": "Blazice",
+      "name_key": "blazice",
+      "vpot_mil_m3": 21.7,
+      "hladina_m_n_m": 302.5,
+      "vyska_hraze_m": 39.0,
+      "p_mm": 778.3,
+      "t_c": 8.9,
+      "et_mm": 546.0,
+      "qa_m3s": 0.076,
+      "mzp_m3s": 0.012,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.086,
+        "pt995": 0.083
+      },
+      "odber_m3s": {
+        "pt95": 0.074,
+        "pt995": 0.071
+      }
+    },
+    "20": {
+      "id_generel": 20,
+      "name": "Brodce",
+      "name_key": "brodce",
+      "vpot_mil_m3": 7.3,
+      "hladina_m_n_m": 570.0,
+      "vyska_hraze_m": 22.5,
+      "p_mm": 676.4,
+      "t_c": 7.4,
+      "et_mm": 525.6,
+      "qa_m3s": 0.28,
+      "mzp_m3s": 0.049,
+      "nul_var_m3s": {
+        "pt95": 0.004,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.215,
+        "pt995": 0.166
+      },
+      "odber_m3s": {
+        "pt95": 0.166,
+        "pt995": 0.117
+      }
+    },
+    "21": {
+      "id_generel": 21,
+      "name": "Čučice",
+      "name_key": "cucice",
+      "vpot_mil_m3": 53.0,
+      "hladina_m_n_m": 293.0,
+      "vyska_hraze_m": 65.0,
+      "p_mm": 616.7,
+      "t_c": 8.0,
+      "et_mm": 502.0,
+      "qa_m3s": 2.898,
+      "mzp_m3s": 0.277,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 2.045,
+        "pt995": 1.459
+      },
+      "odber_m3s": {
+        "pt95": 1.768,
+        "pt995": 1.182
+      }
+    },
+    "22": {
+      "id_generel": 22,
+      "name": "Dlouhá Loučka",
+      "name_key": "dlouhaloucka",
+      "vpot_mil_m3": 5.2,
+      "hladina_m_n_m": 336.0,
+      "vyska_hraze_m": 36.0,
+      "p_mm": 776.8,
+      "t_c": 7.2,
+      "et_mm": 463.8,
+      "qa_m3s": 0.268,
+      "mzp_m3s": 0.054,
+      "nul_var_m3s": {
+        "pt95": 0.001,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.248,
+        "pt995": 0.225
+      },
+      "odber_m3s": {
+        "pt95": 0.194,
+        "pt995": 0.171
+      }
+    },
+    "23": {
+      "id_generel": 23,
+      "name": "Dolní Bolíkov",
+      "name_key": "dolnibolikov",
+      "vpot_mil_m3": 14.2,
+      "hladina_m_n_m": 506.0,
+      "vyska_hraze_m": 34.0,
+      "p_mm": 723.4,
+      "t_c": 7.6,
+      "et_mm": 504.9,
+      "qa_m3s": 0.541,
+      "mzp_m3s": 0.068,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.457,
+        "pt995": 0.405
+      },
+      "odber_m3s": {
+        "pt95": 0.389,
+        "pt995": 0.337
+      }
+    },
+    "24": {
+      "id_generel": 24,
+      "name": "Hanušovice",
+      "name_key": "hanusovice",
+      "vpot_mil_m3": 135.0,
+      "hladina_m_n_m": 502.0,
+      "vyska_hraze_m": 102.0,
+      "p_mm": 987.0,
+      "t_c": 6.3,
+      "et_mm": 478.4,
+      "qa_m3s": 3.506,
+      "mzp_m3s": 1.006,
+      "nul_var_m3s": {
+        "pt95": 0.09,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 3.491,
+        "pt995": 3.262
+      },
+      "odber_m3s": {
+        "pt95": 2.485,
+        "pt995": 2.256
+      }
+    },
+    "25": {
+      "id_generel": 25,
+      "name": "Horní Kounice",
+      "name_key": "hornikounice",
+      "vpot_mil_m3": 8.9,
+      "hladina_m_n_m": 311.0,
+      "vyska_hraze_m": 27.0,
+      "p_mm": 575.7,
+      "t_c": 8.6,
+      "et_mm": 457.3,
+      "qa_m3s": 1.578,
+      "mzp_m3s": 0.269,
+      "nul_var_m3s": {
+        "pt95": 0.018,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.831,
+        "pt995": 0.616
+      },
+      "odber_m3s": {
+        "pt95": 0.562,
+        "pt995": 0.347
+      }
+    },
+    "27": {
+      "id_generel": 27,
+      "name": "Chotěbudice",
+      "name_key": "chotebudice",
+      "vpot_mil_m3": 3.16,
+      "hladina_m_n_m": 471.5,
+      "vyska_hraze_m": 15.0,
+      "p_mm": 652.5,
+      "t_c": 8.0,
+      "et_mm": 520.2,
+      "qa_m3s": 0.368,
+      "mzp_m3s": 0.046,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.192,
+        "pt995": 0.111
+      },
+      "odber_m3s": {
+        "pt95": 0.146,
+        "pt995": 0.065
+      }
+    },
+    "28": {
+      "id_generel": 28,
+      "name": "Kačenka",
+      "name_key": "kacenka",
+      "vpot_mil_m3": 1.0,
+      "hladina_m_n_m": 310.3,
+      "vyska_hraze_m": 12.0,
+      "p_mm": 555.6,
+      "t_c": 8.8,
+      "et_mm": 494.2,
+      "qa_m3s": 0.226,
+      "mzp_m3s": 0.032,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.102,
+        "pt995": 0.078
+      },
+      "odber_m3s": {
+        "pt95": 0.07,
+        "pt995": 0.046
+      }
+    },
+    "29": {
+      "id_generel": 29,
+      "name": "Kuřimské Jestřabí",
+      "name_key": "kurimskejestrabi",
+      "vpot_mil_m3": 10.0,
+      "hladina_m_n_m": 331.0,
+      "vyska_hraze_m": 36.0,
+      "p_mm": 612.2,
+      "t_c": 7.9,
+      "et_mm": 473.7,
+      "qa_m3s": 0.631,
+      "mzp_m3s": 0.11,
+      "nul_var_m3s": {
+        "pt95": 0.012,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.507,
+        "pt995": 0.405
+      },
+      "odber_m3s": {
+        "pt95": 0.397,
+        "pt995": 0.295
+      }
+    },
+    "30": {
+      "id_generel": 30,
+      "name": "Otaslavice",
+      "name_key": "otaslavice",
+      "vpot_mil_m3": 15.3,
+      "hladina_m_n_m": 302.1,
+      "vyska_hraze_m": 47.0,
+      "p_mm": 613.1,
+      "t_c": 8.5,
+      "et_mm": 467.5,
+      "qa_m3s": 0.341,
+      "mzp_m3s": 0.031,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.316,
+        "pt995": 0.256
+      },
+      "odber_m3s": {
+        "pt95": 0.285,
+        "pt995": 0.225
+      }
+    },
+    "31": {
+      "id_generel": 31,
+      "name": "Plaveč",
+      "name_key": "plavec",
+      "vpot_mil_m3": 8.2,
+      "hladina_m_n_m": 262.0,
+      "vyska_hraze_m": 23.0,
+      "p_mm": 537.1,
+      "t_c": 9.0,
+      "et_mm": 478.8,
+      "qa_m3s": 0.521,
+      "mzp_m3s": 0.05,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.249,
+        "pt995": 0.162
+      },
+      "odber_m3s": {
+        "pt95": 0.199,
+        "pt995": 0.112
+      }
+    },
+    "32": {
+      "id_generel": 32,
+      "name": "Podlesný mlýn",
+      "name_key": "podlesnymlyn",
+      "vpot_mil_m3": 5.5,
+      "hladina_m_n_m": 394.0,
+      "vyska_hraze_m": 47.0,
+      "p_mm": 767.1,
+      "t_c": 7.5,
+      "et_mm": 494.8,
+      "qa_m3s": 0.306,
+      "mzp_m3s": 0.036,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.261,
+        "pt995": 0.238
+      },
+      "odber_m3s": {
+        "pt95": 0.225,
+        "pt995": 0.202
+      }
+    },
+    "33": {
+      "id_generel": 33,
+      "name": "Radkovy",
+      "name_key": "radkovy",
+      "vpot_mil_m3": 6.1,
+      "hladina_m_n_m": 256.0,
+      "vyska_hraze_m": 14.0,
+      "p_mm": 695.7,
+      "t_c": 9.0,
+      "et_mm": 531.5,
+      "qa_m3s": 0.176,
+      "mzp_m3s": 0.024,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.148,
+        "pt995": 0.119
+      },
+      "odber_m3s": {
+        "pt95": 0.124,
+        "pt995": 0.095
+      }
+    },
+    "34": {
+      "id_generel": 34,
+      "name": "Rajnochovice (Košovy)",
+      "name_key": "rajnochovicekosovy",
+      "vpot_mil_m3": 11.2,
+      "hladina_m_n_m": 467.0,
+      "vyska_hraze_m": 41.0,
+      "p_mm": 923.3,
+      "t_c": 7.3,
+      "et_mm": 509.1,
+      "qa_m3s": 0.256,
+      "mzp_m3s": 0.052,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.239,
+        "pt995": 0.23
+      },
+      "odber_m3s": {
+        "pt95": 0.187,
+        "pt995": 0.178
+      }
+    },
+    "35": {
+      "id_generel": 35,
+      "name": "Rychtářov",
+      "name_key": "rychtarov",
+      "vpot_mil_m3": 7.3,
+      "hladina_m_n_m": 337.3,
+      "vyska_hraze_m": 39.0,
+      "p_mm": 641.8,
+      "t_c": 8.1,
+      "et_mm": 489.5,
+      "qa_m3s": 0.208,
+      "mzp_m3s": 0.019,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.186,
+        "pt995": 0.154
+      },
+      "odber_m3s": {
+        "pt95": 0.167,
+        "pt995": 0.135
+      }
+    },
+    "36": {
+      "id_generel": 36,
+      "name": "Smilov",
+      "name_key": "smilov",
+      "vpot_mil_m3": 7.7,
+      "hladina_m_n_m": 450.0,
+      "vyska_hraze_m": 62.0,
+      "p_mm": 773.6,
+      "t_c": 7.4,
+      "et_mm": 497.2,
+      "qa_m3s": 0.15,
+      "mzp_m3s": 0.009,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.155,
+        "pt995": 0.137
+      },
+      "odber_m3s": {
+        "pt95": 0.146,
+        "pt995": 0.128
+      }
+    },
+    "37": {
+      "id_generel": 37,
+      "name": "Střížov",
+      "name_key": "strizov",
+      "vpot_mil_m3": 4.7,
+      "hladina_m_n_m": 452.0,
+      "vyska_hraze_m": 26.0,
+      "p_mm": 671.5,
+      "t_c": 7.5,
+      "et_mm": 527.3,
+      "qa_m3s": 0.546,
+      "mzp_m3s": 0.095,
+      "nul_var_m3s": {
+        "pt95": 0.007,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.314,
+        "pt995": 0.19
+      },
+      "odber_m3s": {
+        "pt95": 0.219,
+        "pt995": 0.095
+      }
+    },
+    "38": {
+      "id_generel": 38,
+      "name": "Šternberk",
+      "name_key": "sternberk",
+      "vpot_mil_m3": 13.1,
+      "hladina_m_n_m": 366.9,
+      "vyska_hraze_m": 50.0,
+      "p_mm": 759.1,
+      "t_c": 7.3,
+      "et_mm": 471.4,
+      "qa_m3s": 0.527,
+      "mzp_m3s": 0.076,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.491,
+        "pt995": 0.43
+      },
+      "odber_m3s": {
+        "pt95": 0.415,
+        "pt995": 0.354
+      }
+    },
+    "39": {
+      "id_generel": 39,
+      "name": "Terezín",
+      "name_key": "terezin",
+      "vpot_mil_m3": 5.6,
+      "hladina_m_n_m": 183.3,
+      "vyska_hraze_m": 7.0,
+      "p_mm": 587.0,
+      "t_c": 9.4,
+      "et_mm": 516.0,
+      "qa_m3s": 0.188,
+      "mzp_m3s": 0.042,
+      "nul_var_m3s": {
+        "pt95": 0.003,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.108,
+        "pt995": 0.084
+      },
+      "odber_m3s": {
+        "pt95": 0.066,
+        "pt995": 0.042
+      }
+    },
+    "40": {
+      "id_generel": 40,
+      "name": "Usobrno",
+      "name_key": "usobrno",
+      "vpot_mil_m3": 5.9,
+      "hladina_m_n_m": 481.7,
+      "vyska_hraze_m": 45.0,
+      "p_mm": 696.6,
+      "t_c": 7.3,
+      "et_mm": 494.3,
+      "qa_m3s": 0.136,
+      "mzp_m3s": 0.03,
+      "nul_var_m3s": {
+        "pt95": 0.003,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.131,
+        "pt995": 0.113
+      },
+      "odber_m3s": {
+        "pt95": 0.101,
+        "pt995": 0.083
+      }
+    },
+    "42": {
+      "id_generel": 42,
+      "name": "Vosovec",
+      "name_key": "vosovec",
+      "vpot_mil_m3": 1.35,
+      "hladina_m_n_m": 395.0,
+      "vyska_hraze_m": 6.0,
+      "p_mm": 540.3,
+      "t_c": 8.9,
+      "et_mm": 479.4,
+      "qa_m3s": 0.064,
+      "mzp_m3s": 0.007,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.031,
+        "pt995": 0.019
+      },
+      "odber_m3s": {
+        "pt95": 0.024,
+        "pt995": 0.012
+      }
+    },
+    "43": {
+      "id_generel": 43,
+      "name": "Vysočany",
+      "name_key": "vysocany",
+      "vpot_mil_m3": 17.8,
+      "hladina_m_n_m": 471.5,
+      "vyska_hraze_m": 15.0,
+      "p_mm": 612.9,
+      "t_c": 8.4,
+      "et_mm": 498.4,
+      "qa_m3s": 1.319,
+      "mzp_m3s": 0.243,
+      "nul_var_m3s": {
+        "pt95": 0.041,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.907,
+        "pt995": 0.61
+      },
+      "odber_m3s": {
+        "pt95": 0.664,
+        "pt995": 0.367
+      }
+    },
+    "44": {
+      "id_generel": 44,
+      "name": "Želešice",
+      "name_key": "zelesice",
+      "vpot_mil_m3": 7.7,
+      "hladina_m_n_m": 257.0,
+      "vyska_hraze_m": 27.0,
+      "p_mm": 570.2,
+      "t_c": 8.8,
+      "et_mm": 488.3,
+      "qa_m3s": 0.352,
+      "mzp_m3s": 0.115,
+      "nul_var_m3s": {
+        "pt95": 0.01,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.277,
+        "pt995": 0.238
+      },
+      "odber_m3s": {
+        "pt95": 0.162,
+        "pt995": 0.123
+      }
+    },
+    "50": {
+      "id_generel": 50,
+      "name": "Dvorečky",
+      "name_key": "dvorecky",
+      "vpot_mil_m3": 30.8,
+      "hladina_m_n_m": 562.0,
+      "vyska_hraze_m": 63.0,
+      "p_mm": 834.2,
+      "t_c": 6.5,
+      "et_mm": 498.4,
+      "qa_m3s": 0.482,
+      "mzp_m3s": 0.064,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.475,
+        "pt995": 0.445
+      },
+      "odber_m3s": {
+        "pt95": 0.411,
+        "pt995": 0.381
+      }
+    },
+    "51": {
+      "id_generel": 51,
+      "name": "Hlubocká Pila",
+      "name_key": "hlubockapila",
+      "vpot_mil_m3": 9.4,
+      "hladina_m_n_m": 491.0,
+      "vyska_hraze_m": 41.0,
+      "p_mm": 692.8,
+      "t_c": 7.1,
+      "et_mm": 470.5,
+      "qa_m3s": 0.352,
+      "mzp_m3s": 0.068,
+      "nul_var_m3s": {
+        "pt95": 0.009,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.327,
+        "pt995": 0.297
+      },
+      "odber_m3s": {
+        "pt95": 0.259,
+        "pt995": 0.229
+      }
+    },
+    "52": {
+      "id_generel": 52,
+      "name": "Chaloupky",
+      "name_key": "chaloupky",
+      "vpot_mil_m3": 36.0,
+      "hladina_m_n_m": 862.0,
+      "vyska_hraze_m": 58.0,
+      "p_mm": 1076.4,
+      "t_c": 5.1,
+      "et_mm": 460.1,
+      "qa_m3s": 0.394,
+      "mzp_m3s": 0.108,
+      "nul_var_m3s": {
+        "pt95": 0.012,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.404,
+        "pt995": 0.391
+      },
+      "odber_m3s": {
+        "pt95": 0.296,
+        "pt995": 0.283
+      }
+    },
+    "53": {
+      "id_generel": 53,
+      "name": "Kryry",
+      "name_key": "kryry",
+      "vpot_mil_m3": 9.77,
+      "hladina_m_n_m": 327.0,
+      "vyska_hraze_m": 22.5,
+      "p_mm": 523.0,
+      "t_c": 8.5,
+      "et_mm": 453.6,
+      "qa_m3s": 0.189,
+      "mzp_m3s": 0.044,
+      "nul_var_m3s": {
+        "pt95": 0.004,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.161,
+        "pt995": 0.133
+      },
+      "odber_m3s": {
+        "pt95": 0.117,
+        "pt995": 0.089
+      }
+    },
+    "54": {
+      "id_generel": 54,
+      "name": "Mětikalov",
+      "name_key": "metikalov",
+      "vpot_mil_m3": 2.5,
+      "hladina_m_n_m": 644.0,
+      "vyska_hraze_m": 20.0,
+      "p_mm": 682.9,
+      "t_c": 6.8,
+      "et_mm": 463.0,
+      "qa_m3s": 0.095,
+      "mzp_m3s": 0.018,
+      "nul_var_m3s": {
+        "pt95": 0.003,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.088,
+        "pt995": 0.081
+      },
+      "odber_m3s": {
+        "pt95": 0.07,
+        "pt995": 0.063
+      }
+    },
+    "55": {
+      "id_generel": 55,
+      "name": "Poutnov",
+      "name_key": "poutnov",
+      "vpot_mil_m3": 11.6,
+      "hladina_m_n_m": 643.0,
+      "vyska_hraze_m": 35.0,
+      "p_mm": 705.8,
+      "t_c": 6.7,
+      "et_mm": 476.4,
+      "qa_m3s": 0.681,
+      "mzp_m3s": 0.097,
+      "nul_var_m3s": {
+        "pt95": 0.009,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.534,
+        "pt995": 0.394
+      },
+      "odber_m3s": {
+        "pt95": 0.437,
+        "pt995": 0.297
+      }
+    },
+    "56": {
+      "id_generel": 56,
+      "name": "Skřiváň",
+      "name_key": "skrivan",
+      "vpot_mil_m3": 5.32,
+      "hladina_m_n_m": 598.0,
+      "vyska_hraze_m": 55.0,
+      "p_mm": 977.1,
+      "t_c": 6.1,
+      "et_mm": 490.5,
+      "qa_m3s": 0.433,
+      "mzp_m3s": 0.02,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.34,
+        "pt995": 0.218
+      },
+      "odber_m3s": {
+        "pt95": 0.32,
+        "pt995": 0.198
+      }
+    },
+    "58": {
+      "id_generel": 58,
+      "name": "Tuřany",
+      "name_key": "turany",
+      "vpot_mil_m3": 7.48,
+      "hladina_m_n_m": 450.0,
+      "vyska_hraze_m": 16.0,
+      "p_mm": 685.6,
+      "t_c": 7.6,
+      "et_mm": 526.8,
+      "qa_m3s": 0.167,
+      "mzp_m3s": 0.069,
+      "nul_var_m3s": {
+        "pt95": 0.018,
+        "pt995": 0.003
+      },
+      "qn_m3s": {
+        "pt95": 0.156,
+        "pt995": 0.125
+      },
+      "odber_m3s": {
+        "pt95": 0.087,
+        "pt995": 0.056
+      }
+    },
+    "59": {
+      "id_generel": 59,
+      "name": "Amerika",
+      "name_key": "amerika",
+      "vpot_mil_m3": 30.9,
+      "hladina_m_n_m": 572.0,
+      "vyska_hraze_m": 51.0,
+      "p_mm": 797.8,
+      "t_c": 7.0,
+      "et_mm": 516.9,
+      "qa_m3s": 0.619,
+      "mzp_m3s": 0.074,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.59,
+        "pt995": 0.511
+      },
+      "odber_m3s": {
+        "pt95": 0.516,
+        "pt995": 0.437
+      }
+    },
+    "66": {
+      "id_generel": 66,
+      "name": "Hředle II",
+      "name_key": "hredleii",
+      "vpot_mil_m3": 3.4,
+      "hladina_m_n_m": 281.4,
+      "vyska_hraze_m": 13.6,
+      "p_mm": 583.1,
+      "t_c": 8.7,
+      "et_mm": 499.5,
+      "qa_m3s": 0.273,
+      "mzp_m3s": 0.082,
+      "nul_var_m3s": {
+        "pt95": 0.025,
+        "pt995": 0.009
+      },
+      "qn_m3s": {
+        "pt95": 0.194,
+        "pt995": 0.139
+      },
+      "odber_m3s": {
+        "pt95": 0.112,
+        "pt995": 0.057
+      }
+    },
+    "68": {
+      "id_generel": 68,
+      "name": "Chumava",
+      "name_key": "chumava",
+      "vpot_mil_m3": 4.5,
+      "hladina_m_n_m": 298.45,
+      "vyska_hraze_m": 14.0,
+      "p_mm": 601.5,
+      "t_c": 8.7,
+      "et_mm": 458.7,
+      "qa_m3s": 0.354,
+      "mzp_m3s": 0.147,
+      "nul_var_m3s": {
+        "pt95": 0.045,
+        "pt995": 0.023
+      },
+      "qn_m3s": {
+        "pt95": 0.29,
+        "pt995": 0.217
+      },
+      "odber_m3s": {
+        "pt95": 0.143,
+        "pt995": 0.07
+      }
+    },
+    "69": {
+      "id_generel": 69,
+      "name": "Javornice",
+      "name_key": "javornice",
+      "vpot_mil_m3": 10.6,
+      "hladina_m_n_m": 370.0,
+      "vyska_hraze_m": 28.0,
+      "p_mm": 544.3,
+      "t_c": 8.4,
+      "et_mm": 487.0,
+      "qa_m3s": 0.156,
+      "mzp_m3s": 0.01,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.131,
+        "pt995": 0.107
+      },
+      "odber_m3s": {
+        "pt95": 0.121,
+        "pt995": 0.097
+      }
+    },
+    "70": {
+      "id_generel": 70,
+      "name": "Kladruby",
+      "name_key": "kladruby",
+      "vpot_mil_m3": 27.3,
+      "hladina_m_n_m": 414.0,
+      "vyska_hraze_m": 33.0,
+      "p_mm": 615.4,
+      "t_c": 8.2,
+      "et_mm": 473.3,
+      "qa_m3s": 1.255,
+      "mzp_m3s": 0.166,
+      "nul_var_m3s": {
+        "pt95": 0.003,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.96,
+        "pt995": 0.776
+      },
+      "odber_m3s": {
+        "pt95": 0.794,
+        "pt995": 0.61
+      }
+    },
+    "72": {
+      "id_generel": 72,
+      "name": "Kleštěnice",
+      "name_key": "klestenice",
+      "vpot_mil_m3": 6.5,
+      "hladina_m_n_m": 450.0,
+      "vyska_hraze_m": 34.0,
+      "p_mm": 712.4,
+      "t_c": 7.9,
+      "et_mm": 532.1,
+      "qa_m3s": 0.182,
+      "mzp_m3s": 0.043,
+      "nul_var_m3s": {
+        "pt95": 0.006,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.165,
+        "pt995": 0.142
+      },
+      "odber_m3s": {
+        "pt95": 0.122,
+        "pt995": 0.099
+      }
+    },
+    "76": {
+      "id_generel": 76,
+      "name": "Nabdín",
+      "name_key": "nabdin",
+      "vpot_mil_m3": 3.48,
+      "hladina_m_n_m": 199.0,
+      "vyska_hraze_m": 10.0,
+      "p_mm": 533.1,
+      "t_c": 9.1,
+      "et_mm": 487.8,
+      "qa_m3s": 0.146,
+      "mzp_m3s": 0.02,
+      "nul_var_m3s": {
+        "pt95": 0.001,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.079,
+        "pt995": 0.053
+      },
+      "odber_m3s": {
+        "pt95": 0.059,
+        "pt995": 0.033
+      }
+    },
+    "80": {
+      "id_generel": 80,
+      "name": "Strážiště",
+      "name_key": "straziste",
+      "vpot_mil_m3": 78.0,
+      "hladina_m_n_m": 398.0,
+      "vyska_hraze_m": 52.0,
+      "p_mm": 600.3,
+      "t_c": 7.5,
+      "et_mm": 456.1,
+      "qa_m3s": 2.886,
+      "mzp_m3s": 0.55,
+      "nul_var_m3s": {
+        "pt95": 0.066,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 2.579,
+        "pt995": 2.222
+      },
+      "odber_m3s": {
+        "pt95": 2.029,
+        "pt995": 1.672
+      }
+    },
+    "82": {
+      "id_generel": 82,
+      "name": "Šipín",
+      "name_key": "sipin",
+      "vpot_mil_m3": 39.7,
+      "hladina_m_n_m": 450.0,
+      "vyska_hraze_m": 57.0,
+      "p_mm": 624.8,
+      "t_c": 7.2,
+      "et_mm": 451.1,
+      "qa_m3s": 0.959,
+      "mzp_m3s": 0.12,
+      "nul_var_m3s": {
+        "pt95": 0.004,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.931,
+        "pt995": 0.85
+      },
+      "odber_m3s": {
+        "pt95": 0.811,
+        "pt995": 0.73
+      }
+    },
+    "85": {
+      "id_generel": 85,
+      "name": "Všeruby",
+      "name_key": "vseruby",
+      "vpot_mil_m3": 6.7,
+      "hladina_m_n_m": 472.0,
+      "vyska_hraze_m": 26.0,
+      "p_mm": 568.8,
+      "t_c": 7.6,
+      "et_mm": 475.9,
+      "qa_m3s": 0.143,
+      "mzp_m3s": 0.042,
+      "nul_var_m3s": {
+        "pt95": 0.006,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.128,
+        "pt995": 0.12
+      },
+      "odber_m3s": {
+        "pt95": 0.086,
+        "pt995": 0.078
+      }
+    },
+    "87": {
+      "id_generel": 87,
+      "name": "Býčí skála",
+      "name_key": "byciskala",
+      "vpot_mil_m3": 92.0,
+      "hladina_m_n_m": 285.0,
+      "vyska_hraze_m": 59.0,
+      "p_mm": 631.0,
+      "t_c": 8.4,
+      "et_mm": 506.6,
+      "qa_m3s": 9.637,
+      "mzp_m3s": 1.18,
+      "nul_var_m3s": {
+        "pt95": 0.139,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 5.753,
+        "pt995": 4.644
+      },
+      "odber_m3s": {
+        "pt95": 4.573,
+        "pt995": 3.464
+      }
+    },
+    "88": {
+      "id_generel": 88,
+      "name": "Mnichov",
+      "name_key": "mnichov",
+      "vpot_mil_m3": 26.8,
+      "hladina_m_n_m": 698.0,
+      "vyska_hraze_m": 49.0,
+      "p_mm": 798.4,
+      "t_c": 6.2,
+      "et_mm": 456.8,
+      "qa_m3s": 0.52,
+      "mzp_m3s": 0.029,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.513,
+        "pt995": 0.474
+      },
+      "odber_m3s": {
+        "pt95": 0.484,
+        "pt995": 0.445
+      }
+    },
+    "89": {
+      "id_generel": 89,
+      "name": "Javorník",
+      "name_key": "javornik",
+      "vpot_mil_m3": 13.3,
+      "hladina_m_n_m": 447.0,
+      "vyska_hraze_m": 66.0,
+      "p_mm": 849.7,
+      "t_c": 7.7,
+      "et_mm": 538.1,
+      "qa_m3s": 0.101,
+      "mzp_m3s": 0.017,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.106,
+        "pt995": 0.103
+      },
+      "odber_m3s": {
+        "pt95": 0.089,
+        "pt995": 0.086
+      }
+    },
+    "90": {
+      "id_generel": 90,
+      "name": "Skuhrov",
+      "name_key": "skuhrov",
+      "vpot_mil_m3": 32.1,
+      "hladina_m_n_m": 484.0,
+      "vyska_hraze_m": 84.0,
+      "p_mm": 1093.4,
+      "t_c": 6.2,
+      "et_mm": 484.6,
+      "qa_m3s": 0.91,
+      "mzp_m3s": 0.074,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.931,
+        "pt995": 0.812
+      },
+      "odber_m3s": {
+        "pt95": 0.857,
+        "pt995": 0.738
+      }
+    },
+    "91": {
+      "id_generel": 91,
+      "name": "Ledný",
+      "name_key": "ledny",
+      "vpot_mil_m3": 3.93,
+      "hladina_m_n_m": 500.0,
+      "vyska_hraze_m": 31.0,
+      "p_mm": 740.8,
+      "t_c": 7.7,
+      "et_mm": 531.0,
+      "qa_m3s": 0.071,
+      "mzp_m3s": 0.006,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.065,
+        "pt995": 0.056
+      },
+      "odber_m3s": {
+        "pt95": 0.059,
+        "pt995": 0.05
+      }
+    },
+    "92": {
+      "id_generel": 92,
+      "name": "Záhorovice",
+      "name_key": "zahorovice",
+      "vpot_mil_m3": 11.0,
+      "hladina_m_n_m": 275.0,
+      "vyska_hraze_m": 33.0,
+      "p_mm": 727.1,
+      "t_c": 8.7,
+      "et_mm": 554.2,
+      "qa_m3s": 0.196,
+      "mzp_m3s": 0.023,
+      "nul_var_m3s": {
+        "pt95": 0.0,
+        "pt995": 0.0
+      },
+      "qn_m3s": {
+        "pt95": 0.181,
+        "pt995": 0.16
+      },
+      "odber_m3s": {
+        "pt95": 0.158,
+        "pt995": 0.137
+      }
+    }
+  }
+}

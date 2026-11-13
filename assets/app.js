@@ -4,7 +4,7 @@ const CONFIG = {
   colors: { SSP245: '#1683c3', SSP370: '#e49a27', SSP585: '#ca526b' },
   dash: { '2050': 'solid', '2070': 'dash', '2085': 'dot' },
   layers: {
-    povodi: { url:'data/povodi.geojson', label:'Povodí LAPV' },
+    povodi: { url:'data/povodi.geojson?v=1.6', label:'Povodí LAPV' },
     zatopy: { url:'data/zatopy.geojson', label:'Zátopy' },
     plochy: { url:'data/MK_plochy.geojson', label:'MK – plochy' },
     body: { url:'data/MK_body.geojson', label:'MK – body' }
@@ -62,12 +62,23 @@ function sortFeaturesForClickPriority(geo){
   return sorted;
 }
 
+
+// Fixed Leaflet pane order: basins < reservoirs < MK polygons < MK points.
+// Selection and bringToFront() cannot reorder different panes.
+const MAP_PANES = {lapvPovodi:410,lapvZatopy:430,lapvMkPlochy:450,lapvMkBody:470};
+function initializeMapPanes(map){
+  for(const [name,zIndex] of Object.entries(MAP_PANES)){
+    const pane=map.createPane(name);
+    pane.style.zIndex=String(zIndex);
+  }
+}
+
 function defaultPolygonStyle(){return {color:'#237bb2',weight:1.6,fillColor:'#429cc5',fillOpacity:.16};}
 function selectedPolygonStyle(){return {color:'#e96b22',weight:3.2,fillColor:'#f8ab5b',fillOpacity:.34};}
 function mapPopup(feature){let p=feature.properties||{};return `<div class="popup-title">${safe(nameOf(feature))}</div><div class="popup-id">ID_Generel: <strong>${safe(p.ID_Generel)}</strong></div>${p.TOK?`<div>Tok: ${safe(p.TOK)}</div>`:''}<div style="margin-top:7px;color:#147baf">Kliknutím vyberete lokalitu pro graf.</div>`;}
 function addMapLayer(key, geo){
   if(key==='povodi'){
-    const group=L.geoJSON(sortFeaturesForClickPriority(geo),{style:defaultPolygonStyle(),onEachFeature:(feature,layer)=>{
+    const group=L.geoJSON(sortFeaturesForClickPriority(geo),{pane:'lapvPovodi',style:defaultPolygonStyle(),onEachFeature:(feature,layer)=>{
       layer.bindTooltip(safe(nameOf(feature)),{sticky:true});
       layer.bindPopup(mapPopup(feature));
       layer.on('click',()=>selectLocation(feature.properties.ID_Generel,true));
@@ -78,11 +89,11 @@ function addMapLayer(key, geo){
     state.layers[key]=group;
     state.baseBounds=group.getBounds();
   }else if(key==='zatopy'){
-    state.layers[key]=L.geoJSON(sortFeaturesForClickPriority(geo),{style:defaultZatopaStyle(),onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f))+' \u00b7 katalogov\u00fd list',{sticky:true});l.on('click',()=>{selectLocation(f.properties.ID_Generel,true);openCatalog(f.properties.ID_Generel);});}});
+    state.layers[key]=L.geoJSON(sortFeaturesForClickPriority(geo),{pane:'lapvZatopy',style:defaultZatopaStyle(),onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f))+' \u00b7 katalogov\u00fd list',{sticky:true});l.on('click',()=>{selectLocation(f.properties.ID_Generel,true);openCatalog(f.properties.ID_Generel);});}});
   }else if(key==='plochy'){
-    state.layers[key]=L.geoJSON(geo,{style:{color:'#8b5bba',weight:1.2,fillColor:'#aa7ed0',fillOpacity:.28},onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f)),{sticky:true});l.on('click',()=>selectLocation(f.properties.ID_Generel,true));}});
+    state.layers[key]=L.geoJSON(sortFeaturesForClickPriority(geo),{pane:'lapvMkPlochy',style:{color:'#8b5bba',weight:1.2,fillColor:'#aa7ed0',fillOpacity:.28},onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f)),{sticky:true});l.on('click',()=>selectLocation(f.properties.ID_Generel,true));}});
   }else{
-    state.layers[key]=L.geoJSON(geo,{pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:4,color:'#fff',weight:1,fillColor:'#e98727',fillOpacity:.9}),onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f)),{sticky:true});l.on('click',()=>selectLocation(f.properties.ID_Generel,true));}});
+    state.layers[key]=L.geoJSON(geo,{pane:'lapvMkBody',pointToLayer:(f,latlng)=>L.circleMarker(latlng,{pane:'lapvMkBody',radius:4,color:'#fff',weight:1,fillColor:'#e98727',fillOpacity:.9}),onEachFeature:(f,l)=>{l.bindTooltip(safe(nameOf(f)),{sticky:true});l.on('click',()=>selectLocation(f.properties.ID_Generel,true));}});
   }
 }
 function defaultZatopaStyle(){return {color:'#139fae',weight:1.5,fillColor:'#25bdc3',fillOpacity:.27};}
@@ -93,7 +104,7 @@ function highlightZatopy(){
   group.eachLayer(l=>{
     const active=String(l.feature.properties.ID_Generel)===String(state.selectedId);
     l.setStyle(active?selectedZatopaStyle():defaultZatopaStyle());
-    if(active)l.bringToFront();
+    // Preserve area-based stacking; larger basins must not cover smaller ones.
   });
 }
 function highlight(){
@@ -102,7 +113,7 @@ function highlight(){
   group.eachLayer(layer=>{
     const isSelected=String(layer.feature.properties.ID_Generel)===String(state.selectedId);
     layer.setStyle(isSelected?selectedPolygonStyle():defaultPolygonStyle());
-    if(isSelected){layer.bringToFront();found=layer;}
+    if(isSelected){found=layer;} // Area-based order keeps nested basins selectable.
   });
   return found;
 }
@@ -208,10 +219,10 @@ const CATALOG_METRICS=[
   {label:'V\u00fdpar ET',unit:'mm',key:'et_mm',digits:1},
   {label:'Pr\u016ftok Qa',unit:'m\u00b3/s',key:'qa_m3s',digits:3},
   {label:'MZP',unit:'m\u00b3/s',key:'mzp_m3s',digits:3},
-  {label:'Qn \u00b7 PT95',unit:'m\u00b3/s',key:'qn_m3s',pt:'pt95',digits:3},
-  {label:'Qn \u00b7 PT99,5',unit:'m\u00b3/s',key:'qn_m3s',pt:'pt995',digits:3},
-  {label:'Odb\u011br \u00b7 PT95',unit:'m\u00b3/s',key:'odber_m3s',pt:'pt95',digits:3},
-  {label:'Odb\u011br \u00b7 PT99,5',unit:'m\u00b3/s',key:'odber_m3s',pt:'pt995',digits:3}
+  {label:'Qn \u00b7 Pt 95 %',unit:'m\u00b3/s',key:'qn_m3s',pt:'pt95',digits:3},
+  {label:'Qn \u00b7 Pt 99,5 %',unit:'m\u00b3/s',key:'qn_m3s',pt:'pt995',digits:3},
+  {label:'Odb\u011br \u00b7 Pt 95 %',unit:'m\u00b3/s',key:'odber_m3s',pt:'pt95',digits:3},
+  {label:'Odb\u011br \u00b7 Pt 99,5 %',unit:'m\u00b3/s',key:'odber_m3s',pt:'pt995',digits:3}
 ];
 function fmtCz(value,digits=1){
   const n=Number(value);
@@ -248,6 +259,9 @@ async function loadCatalogData(){
   });
   return state.catalogPromise;
 }
+function matchingPovodi(id){
+  return state.geo.povodi?.features?.find(f=>String(f.properties.ID_Generel)===String(id))?.properties||null;
+}
 function matchingZatopa(id){
   return state.geo.zatopy?.features?.find(f=>String(f.properties.ID_Generel)===String(id))?.properties||null;
 }
@@ -258,6 +272,7 @@ function renderCatalog(id){
   const hyd=state.hydrology?.records?.[String(id)];
   const future=state.climate?.records?.[String(id)];
   const zatopa=matchingZatopa(id);
+  const povodi=matchingPovodi(id);
   $('catalogId').textContent='\u00b7 ID '+id;
   $('catalogTitle').textContent=hyd?.name||zatopa?.NAZEV_NADR||('LAPV '+id);
   $('catalogMeta').textContent=`${zatopa?.TOK?'Tok: '+zatopa.TOK+'  \u00b7  ':''}ID_Generel: ${id}`;
@@ -272,6 +287,12 @@ function renderCatalog(id){
     catalogueCard('Plocha z\u00e1topy',fmtCz(zatopa?.Plocha,3),'km\u00b2'),
     catalogueCard('Hladina',fmtCzFlexible(hyd.hladina_m_n_m,2),'m n. m.'),
     catalogueCard('V\u00fd\u0161ka hr\u00e1ze',fmtCzFlexible(hyd.vyska_hraze_m,2),'m')
+  ].join('');
+  const details=[
+    catalogueCard('Kategorie n\u00e1dr\u017ee',povodi?.Kategorie??'\u2014',''),
+    catalogueCard('Po\u010det MKB',fmtCz(povodi?.['Po\u010det MKB'],0),''),
+    catalogueCard('Plocha p\u0159isp\u00edvaj\u00edc\u00edch povod\u00ed MKB',fmtCz(povodi?.['Plocha MKB (km2)'],2),'km\u00b2'),
+    catalogueCard('T\u0159\u00edda ohro\u017een\u00ed povod\u00ed eroz\u00ed',fmtCz(povodi?.['T\u0159\u00edda ohro\u017een\u00ed'],0),'')
   ].join('');
   const head=CATALOG_COMBOS.map(c=>`<th scope="col" class="cat-scenario-head"><strong>${c.per}</strong><small>${c.sim}</small></th>`).join('');
   const body=CATALOG_METRICS.map(m=>{
@@ -289,6 +310,7 @@ function renderCatalog(id){
   const baselineNote=hyd.nul_var_m3s||{};
   $('catalogBody').innerHTML=`
     <div class="catalog-stat-grid">${cards}</div>
+    <div class="catalog-stat-grid catalog-detail-grid">${details}</div>
     <div class="catalog-section-title"><h3>Hydrologick\u00e9 a klimatick\u00e9 charakteristiky</h3>`+
       `<span>${Number.isFinite(nModels)?nModels+' model\u016f':''}</span></div>
     <p class="catalog-swipe-hint">\u2194 Posu\u0148te tabulku do strany pro zobrazen\u00ed sc\u00e9n\u00e1\u0159\u016f.</p>
@@ -296,8 +318,8 @@ function renderCatalog(id){
       <table class="catalog-table"><thead><tr><th scope="col">Ukazatel</th>`+
       `<th scope="col" class="cat-scenario-head cat-ref-head"><strong>2005</strong><small>Referen\u010dn\u00ed</small></th>${head}</tr></thead>`+
       `<tbody>${body}</tbody></table></div>
-    <div class="catalog-null">Nulov\u00e1 varianta (2005): PT95 = <strong>${safe(fmtCz(baselineNote.pt95,3))}</strong> m\u00b3/s `+
-       `\u00b7 PT99,5 = <strong>${safe(fmtCz(baselineNote.pt995,3))}</strong> m\u00b3/s.</div>
+    <div class="catalog-null">Nulov\u00e1 varianta (2005): Pt 95 % = <strong>${safe(fmtCz(baselineNote.pt95,3))}</strong> m\u00b3/s `+
+       `\u00b7 Pt 99,5 % = <strong>${safe(fmtCz(baselineNote.pt995,3))}</strong> m\u00b3/s.</div>
     <p class="catalog-footnote">V bu\u0148k\u00e1ch: naho\u0159e pr\u016fm\u011br, pod n\u00edm interval 25.\u201375. percentilu. `+
       `<strong>2005</strong> ozna\u010duje referen\u010dn\u00ed obdob\u00ed 1991\u20132020. `+
       `2050 = 2035\u20132065; 2085 = 2070\u20132100. `+
@@ -327,6 +349,7 @@ function closeCatalog(){const dialog=$('catalogDialog');if(dialog.open)dialog.cl
 function downloadCatalogCsv(){
   const id=state.catalogId,hyd=state.hydrology?.records?.[id],future=state.climate?.records?.[id];
   if(!hyd||!future)return;
+  const povodi=matchingPovodi(id), zatopa=matchingZatopa(id);
   const header=['ID_Generel','Ukazatel','Jednotka','2005',...CATALOG_COMBOS.flatMap(c=>[`${c.per}_${c.sim}_prumer`,`${c.per}_${c.sim}_p25`,`${c.per}_${c.sim}_p75`])];
   const rows=CATALOG_METRICS.map(m=>[
     id,m.label,m.unit,catalogRef(hyd,m)??'',
@@ -335,7 +358,20 @@ function downloadCatalogCsv(){
       return [v?.mean??'',v?.p25??'',v?.p75??''];
     })
   ]);
-  const csv=[header,...rows].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+  const metadata=[
+    ['Identifikace a technick\u00e9 parametry','Hodnota','Jednotka'],
+    ['LAPV',hyd.name,''],
+    ['ID_Generel',id,''],
+    ['Potenci\u00e1ln\u00ed objem',hyd.vpot_mil_m3??'','mil. m3'],
+    ['Plocha z\u00e1topy',zatopa?.Plocha??'','km2'],
+    ['Hladina',hyd.hladina_m_n_m??'','m n. m.'],
+    ['V\u00fd\u0161ka hr\u00e1ze',hyd.vyska_hraze_m??'','m'],
+    ['Kategorie n\u00e1dr\u017ee',povodi?.Kategorie??'',''],
+    ['Po\u010det MKB',povodi?.['Po\u010det MKB']??'',''],
+    ['Plocha p\u0159isp\u00edvaj\u00edc\u00edch povod\u00ed MKB',povodi?.['Plocha MKB (km2)']??'','km2'],
+    ['T\u0159\u00edda ohro\u017een\u00ed povod\u00ed eroz\u00ed',povodi?.['T\u0159\u00edda ohro\u017een\u00ed']??'','']
+  ];
+  const csv=[...metadata,[],header,...rows].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
   const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
   const a=document.createElement('a');a.href=url;a.download=`LAPV_${id}_katalog.csv`;
   document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
@@ -345,6 +381,7 @@ async function init(){
   ['locationSelect','locationMeta','variableSelect','showBand','showMean','chartHeading','chartSubheading','status'].forEach(id=>els[id]=$(id));
   if(!window.L||!window.Plotly){setStatus('Nepodařilo se načíst Leaflet nebo Plotly. Ověřte připojení k internetu.',true);return;}
   state.map=L.map('map',{preferCanvas:false,zoomControl:true}).setView([49.7,15.3],7);
+  initializeMapPanes(state.map);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(state.map);
   try{
     const entries=await Promise.all([...Object.entries(CONFIG.layers).map(async([k,c])=>{const r=await fetch(c.url);if(!r.ok)throw Error(`HTTP ${r.status}: ${c.url}`);return [k,await r.json()];}),fetch('data/series.json').then(r=>{if(!r.ok)throw Error(`HTTP ${r.status}: series.json`);return r.json();})]);

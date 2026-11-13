@@ -249,3 +249,18 @@ html, body { height:100%; width:100%; overflow:hidden; }
   .partner-tacr img {height:38px;width:38px;}
   .tacr-caption {font-size:9px; text-align:center;}
 }
+
+/* LAPV v1.6: four compact characteristics below the original four metrics. */
+.catalog-detail-grid {margin-top:-8px;margin-bottom:18px;}
+.catalog-detail-grid .catalog-stat {background:#f8fafc;padding:10px 14px;}
+.catalog-detail-grid .catalog-stat-value {font-size:18px;}
+.catalog-detail-grid .catalog-stat-value small {font-size:11px;}
+.catalog-detail-grid .catalog-stat-label {line-height:1.35;min-height:2.7em;}
+@media (max-width:780px) {
+  .catalog-detail-grid {margin-top:-5px;margin-bottom:14px;}
+  .catalog-detail-grid .catalog-stat {padding:10px;}
+  .catalog-detail-grid .catalog-stat-value {font-size:17px;}
+}
+@media print {
+  .catalog-detail-grid .catalog-stat {background:#fff!important;}
+}

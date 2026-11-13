@@ -196,7 +196,7 @@ function readUrlOptions(){
   const q=new URLSearchParams(location.search);return {id:q.get('id'),variable:q.get('var'),scenarios:q.get('sim'),periods:q.get('per')};
 }
 function setChoices(id,values){const set=new Set(values);document.querySelectorAll(`#${id} input`).forEach(el=>{el.checked=set.has(el.value);});}
-function resetAll(){setChoices('scenarioChecks',['SSP245']);setChoices('periodChecks',['2050']);els.variableSelect.value='P_delta';els.showBand.checked=true;els.showMean.checked=true;selectLocation(state.geo.povodi.features[0].properties.ID_Generel);fitHome();}
+
 function downloadCsv(){
   const combos=visibleCombinationData();if(!combos.length){setStatus('Pro export vyberte alespoň jeden scénář a horizont.',true);return;}
   const lines=['ID_Generel,NAZEV_NADR,SIM,PER,Month,var,val_mean,val_25,val_75,val_min,val_max'];
@@ -417,7 +417,17 @@ async function init(){
   $('catalogDownload').addEventListener('click',downloadCatalogCsv);
   $('catalogPrint').addEventListener('click',()=>window.print());
   $('catalogDialog').addEventListener('click',e=>{if(e.target===$('catalogDialog'))closeCatalog();});
-  $('fitMap').addEventListener('click',fitHome);$('resetAll').addEventListener('click',resetAll);$('downloadCsv').addEventListener('click',downloadCsv);
+  $('fitMap').addEventListener('click',fitHome);$('downloadCsv').addEventListener('click',downloadCsv);
   window.addEventListener('resize',()=>syncVisualSizes());
 }
-window.addEventListener('DOMContentLoaded',init);
+function setupInfoDialog(){
+  const dialog=$('infoDialog');
+  const openButton=$('openInfo');
+  const close=()=>{if(dialog.open)dialog.close();};
+  openButton.addEventListener('click',()=>{if(!dialog.open)dialog.showModal();});
+  $('infoClose').addEventListener('click',close);
+  $('infoDone').addEventListener('click',close);
+  dialog.addEventListener('click',event=>{if(event.target===dialog)close();});
+  dialog.addEventListener('close',()=>{openButton.focus({preventScroll:true});});
+}
+window.addEventListener('DOMContentLoaded',()=>{setupInfoDialog();init();});

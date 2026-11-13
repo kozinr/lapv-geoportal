@@ -8,10 +8,10 @@
   <title>Geoportál LAPV</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://cdn.plot.ly">
-  <link rel="stylesheet" href="assets/style.css?v=1.7">
+  <link rel="stylesheet" href="assets/style.css?v=1.8">
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-  <script defer src="assets/app.js?v=1.7"></script>
+  <script defer src="assets/app.js?v=1.8"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -48,7 +48,7 @@
         </section>
       </aside>
       <main class="main-content">
-        <section class="map-card" aria-label="Mapa lokalit LAPV"><div class="panel-header"><div><h2>Mapa lokalit</h2></div><div class="map-actions"><button id="openCatalogButton" class="small-button catalog-action" type="button" title="Zobrazit katalogový list vybrané LAPV">▣ Katalog LAPV</button><button id="fitMap" class="small-button" type="button">⤢ Celá mapa</button></div></div><div id="map" role="application" aria-label="Interaktivní mapa LAPV"></div><div class="map-bottom-hint">Povodí: kliknutí aktualizuje graf. Zátopy: kliknutí otevře katalogový list.</div></section>
+        <section class="map-card" aria-label="Mapa lokalit LAPV"><div class="panel-header"><div><h2>Mapa lokalit</h2></div><div class="map-actions"><button id="openCatalogButton" class="small-button catalog-action" type="button" title="Zobrazit katalogový list vybrané LAPV">▣ Katalog LAPV</button><button id="openHgButton" class="small-button hg-action" type="button" title="Zobrazit hydrogeologický pasport vybrané LAPV">▤ HG List</button><button id="fitMap" class="small-button" type="button">⤢ Celá mapa</button></div></div><div id="map" role="application" aria-label="Interaktivní mapa LAPV"></div><div class="map-bottom-hint">Povodí: kliknutí aktualizuje graf. Zátopy: kliknutí otevře katalogový list; HG List zobrazí pasport vybrané lokality.</div></section>
         <section class="chart-card" aria-label="Analytický graf"><div class="panel-header chart-header"><div><h2 id="chartHeading">Měsíční změny</h2><div id="chartSubheading" class="chart-subheading">Vyberte lokalitu na mapě</div></div><button id="downloadCsv" class="small-button" type="button" title="Stáhnout zobrazené měsíční hodnoty">↓ CSV</button></div><div id="chart" role="img" aria-label="Graf měsíčních změn pro vybrané scénáře a horizonty"></div><div class="chart-note"><span class="note-dot"></span><span>Plná čára: 2050 · čárkovaná: 2070 · tečkovaná: 2085. Průsvitná plocha: 25.–75. percentil.</span></div><div id="status" class="status" role="status">Načítám data…</div></section>
       </main>
     </div>
@@ -157,7 +157,7 @@
         <h3 id="infoAuthors">Autoři a kontakt</h3>
         <p class="info-author-list">Roman Kožín, Martina Peláková, Jiří Prinz, Adam Vizina, Milena Forejtníková, Helena Nováková, Kateřina Sedláčková, Martin Caletka a Kateřina Kovářová.</p>
         <p class="info-contact"><span>Kontaktní osoba</span><strong>Roman Kožín</strong><a href="mailto:roman.kozin@vuv.cz">roman.kozin@vuv.cz</a></p>
-        <p class="info-note">Podkladový popis zmiňuje také stažení hydrogeologického pasportu pomocí tlačítka „HG List“. Toto tlačítko zatím není v aktuální verzi geoportálu dostupné.</p>
+        <p class="info-note">Hydrogeologický pasport vybrané lokality otevřete pomocí tlačítka <strong>HG List</strong> vedle tlačítka Katalog LAPV. Pasporty se zveřejňují postupně podle dostupnosti dokumentů.</p>
       </section>
     </div>
     <div class="info-foot"><span>Geoportál LAPV · projekt SS02030027</span><button id="infoDone" class="info-done" type="button">Zavřít informace</button></div>
@@ -170,12 +170,34 @@
         <p id="catalogMeta" class="catalog-meta"></p>
       </div>
       <div class="catalog-toolbar">
+        <button id="catalogHg" class="small-button hg-action" type="button" title="Otevřít hydrogeologický pasport této lokality">▤ HG List</button>
         <button id="catalogDownload" class="small-button" type="button" title="St&aacute;hnout hodnoty katalogov&eacute;ho listu do CSV">&#8595; CSV</button>
         <button id="catalogPrint" class="small-button" type="button" title="Tisk katalogov&eacute;ho listu">Tisk</button>
         <button id="catalogClose" class="catalog-close" type="button" aria-label="Zav&#345;&iacute;t katalogov&yacute; list">&times;</button>
       </div>
     </div>
     <div id="catalogBody" class="catalog-body"><p class="catalog-loading">Na&#269;&iacute;t&aacute;n&iacute; katalogov&yacute;ch dat...</p></div>
+  </dialog>
+  <dialog id="hgDialog" class="hg-dialog" aria-labelledby="hgTitle" aria-describedby="hgSubtitle">
+    <div class="hg-head">
+      <div class="hg-heading">
+        <div class="section-eyebrow">HYDROGEOLOGICKÝ PASPORT LAPV <span id="hgId"></span></div>
+        <h2 id="hgTitle">Pasport lokality</h2>
+        <p id="hgSubtitle" class="catalog-meta">Hodnocení vlivu nádrže na podzemní vody</p>
+      </div>
+      <div class="hg-toolbar">
+        <a id="hgOpen" class="small-button hg-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Otevřít PDF ↗</a>
+        <a id="hgDownload" class="small-button hg-link hg-download" href="#" download hidden>↓ Stáhnout PDF</a>
+        <button id="hgClose" class="catalog-close" type="button" aria-label="Zavřít hydrogeologický pasport">&times;</button>
+      </div>
+    </div>
+    <div class="hg-body">
+      <div id="hgMessage" class="hg-message" role="status">Načítám hydrogeologický pasport…</div>
+      <div id="hgViewer" class="hg-viewer" hidden>
+        <iframe id="hgFrame" title="Náhled hydrogeologického pasportu" loading="lazy"></iframe>
+        <p>Pokud se dokument ve vašem prohlížeči nezobrazuje, použijte tlačítko <strong>Otevřít PDF</strong> nebo <strong>Stáhnout PDF</strong>.</p>
+      </div>
+    </div>
   </dialog>
 </body>
 </html>

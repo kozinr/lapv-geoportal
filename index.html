@@ -8,16 +8,16 @@
   <title>Geoportál LAPV</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://cdn.plot.ly">
-  <link rel="stylesheet" href="assets/style.css?v=1.6">
+  <link rel="stylesheet" href="assets/style.css?v=1.7">
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-  <script defer src="assets/app.js?v=1.6"></script>
+  <script defer src="assets/app.js?v=1.7"></script>
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
       <div class="brand"><span class="brand-mark" aria-hidden="true">≋</span><div><div class="brand-name">Geoportál LAPV</div></div></div>
-      <div class="top-actions"><span class="dataset-pill"><span class="dot"></span> 61 lokalit LAPV</span><button id="resetAll" class="ghost-button" type="button" title="Obnovit výchozí nastavení">↻ <span>Obnovit výběr</span></button></div>
+      <div class="top-actions"><span class="dataset-pill"><span class="dot"></span> 61 lokalit LAPV</span><button id="openInfo" class="ghost-button info-trigger" type="button" title="Informace o geoportálu" aria-haspopup="dialog" aria-controls="infoDialog"><span class="info-trigger-icon" aria-hidden="true">ⓘ</span><span>Info</span></button></div>
     </header>
     <div class="workspace">
       <aside class="sidebar" aria-label="Ovládací panel">
@@ -43,6 +43,7 @@
               <span class="tacr-caption">Technologická agentura ČR</span>
             </a>
           </div>
+          <p class="author-credit">Vytvořil: Roman Kožín (VUV TGM).</p>
           <p class="map-data-credit">Mapová data © přispěvatelé OpenStreetMap.</p>
         </section>
       </aside>
@@ -52,6 +53,115 @@
       </main>
     </div>
   </div>
+  <dialog id="infoDialog" class="info-dialog" aria-labelledby="infoTitle" aria-describedby="infoLead">
+    <div class="info-head">
+      <div class="info-head-copy">
+        <div class="info-kicker">SPECIALIZOVANÁ DATABÁZE · CENTRUM VODA</div>
+        <h2 id="infoTitle">O geoportálu LAPV</h2>
+        <p id="infoLead">Informace o lokalitách, klimatických scénářích, hydrologických charakteristikách a způsobu interpretace výsledků.</p>
+      </div>
+      <button id="infoClose" class="info-close" type="button" aria-label="Zavřít informační okno" title="Zavřít">&times;</button>
+    </div>
+    <div class="info-body">
+      <div class="info-stat-row" aria-label="Základní údaje o geoportálu">
+        <div class="info-stat"><strong>61</strong><span>lokalit LAPV</span></div>
+        <div class="info-stat"><strong>4</strong><span>mapové vrstvy</span></div>
+        <div class="info-stat"><strong>7</strong><span>klimatických modelů</span></div>
+      </div>
+
+      <section class="info-section" aria-labelledby="infoAbout">
+        <h3 id="infoAbout">Účel a obsah geoportálu</h3>
+        <p>Geoportál LAPV je specializovanou databází 61 lokalit akumulace povrchových vod (LAPV) vhodných pro případnou výstavbu vodních nádrží. V roce 2021 byly na začátku projektu vymezeny oblasti s nedostatkem vody (tzv. deficitní oblasti). Z <strong>Generelu LAPV z roku 2020</strong> byly vybrány lokality ležící v těchto oblastech nebo v jejich bezprostřední blízkosti, které mohou přispět ke zmírnění nedostatku vody.</p>
+        <p>Parametry nádrží, například potenciální objem a plocha zátopy, vycházejí z Generelu LAPV. Výpočty uvažují <strong>maximální potenciální objem nádrže</strong>, protože případné rozdělení objemu na prostor stálého nadržení, zásobní a retenční prostor zatím není stanoveno.</p>
+        <div class="info-layer-row"><span>Povodí LAPV</span><span>Zátopy</span><span>Modifikované kritické body (MKB)</span><span>Přispívající plochy MKB</span></div>
+      </section>
+
+      <section class="info-section" aria-labelledby="infoHow">
+        <h3 id="infoHow">Jak geoportál používat</h3>
+        <div class="info-feature-grid">
+          <div class="info-feature">
+            <span class="info-feature-label">01 · Grafy</span>
+            <h4>Výběr povodí</h4>
+            <p>Kliknutím na povodí nebo výběrem lokality v levém panelu se zobrazí měsíční změny <strong>srážek a odtoku v %</strong> a <strong>teploty ve °C</strong> oproti období 1991–2020. Lze porovnávat klimatické scénáře i časové horizonty.</p>
+            <p>Čára ukazuje průměr sedmi modelů, průsvitný pás mezimodelovou variabilitu mezi 25. a 75. percentilem.</p>
+          </div>
+          <div class="info-feature">
+            <span class="info-feature-label">02 · Katalog LAPV</span>
+            <h4>Výběr zátopy</h4>
+            <p>Po zapnutí vrstvy <strong>Zátopy</strong> a kliknutí na polygon, případně po stisknutí tlačítka <strong>Katalog LAPV</strong>, se zobrazí technické, hydrologické a klimatické charakteristiky vybrané lokality.</p>
+            <p>Průměrné hodnoty jsou vyznačeny tučně, interval 25.–75. percentilu menším šedým písmem.</p>
+          </div>
+        </div>
+        <div class="info-highlight">
+          <strong>Jak číst období</strong>
+          <span><b>2005</b> označuje referenční období <b>1991–2020</b>. Budoucí horizonty představují víceletá období, nikoli jednotlivé roky. V katalogu odpovídá 2050 období 2035–2065 a 2085 období 2070–2100.</span>
+        </div>
+      </section>
+
+      <section class="info-section" aria-labelledby="infoHydro">
+        <h3 id="infoHydro">Výklad hydrologických ukazatelů</h3>
+        <div class="info-definition-list">
+          <div><strong>MZP</strong><p>Minimální zůstatkový průtok. V použitých výpočtech byl stanoven jako 0,73násobek 10% kvantilu průměrných měsíčních průtoků; tato hodnota přibližně odpovídá současnému nastavení. Pro jednotlivé scénáře a období se MZP počítá samostatně.</p></div>
+          <div><strong>Qn</strong><p>Maximální možný nadlepšený průtok z nádrže pro danou zabezpečenost podle trvání <b>Pt</b>.</p></div>
+          <div><strong>Odběr</strong><p>Maximální možný odběr pro danou zabezpečenost, určený rozdílem <b>Qn − MZP</b>.</p></div>
+          <div><strong>Nulová varianta</strong><p>Možný odběr přímo z toku nad rámec MZP v případě, že nádrž není vybudována.</p></div>
+        </div>
+        <p class="info-note">Označení <b>Pt 95 %</b> a <b>Pt 99,5 %</b> vyjadřují požadovanou zabezpečenost podle trvání.</p>
+      </section>
+
+      <section class="info-section" aria-labelledby="infoScenarios">
+        <h3 id="infoScenarios">Použité scénáře změny klimatu</h3>
+        <p class="info-section-intro">Odhady globálního oteplení se vztahují k období 2081–2100 oproti předindustriálnímu období 1850–1900; hodnoty radiačního působení k roku 2100.</p>
+        <div class="info-scenario-grid">
+          <article class="info-scenario info-scenario-245">
+            <div class="info-scenario-label">SSP2-4.5 <span>SSP245</span></div>
+            <h4>Střední emisní scénář</h4>
+            <div class="info-scenario-values"><span><b>4,5</b> W/m²</span><span><b>+2,7</b> °C</span></div>
+            <p>Předpokládá postupné omezování emisí a zavádění klimatických opatření. Ve vodním režimu se může projevit vyšší evapotranspirací, změnou sezonního rozložení odtoku a zvýšeným rizikem sucha v některých oblastech.</p>
+          </article>
+          <article class="info-scenario info-scenario-370">
+            <div class="info-scenario-label">SSP3-7.0 <span>SSP370</span></div>
+            <h4>Vyšší emise</h4>
+            <div class="info-scenario-values"><span><b>7,0</b> W/m²</span><span><b>+3,6</b> °C</span></div>
+            <p>Počítá s regionálním soupeřením, omezenou mezinárodní spoluprací a nedostatečným snižováním emisí. Výraznější oteplování může vést k vyšším ztrátám vody, omezení dostupnosti vodních zdrojů a delším obdobím sucha.</p>
+          </article>
+          <article class="info-scenario info-scenario-585">
+            <div class="info-scenario-label">SSP5-8.5 <span>SSP585</span></div>
+            <h4>Vysoké emise</h4>
+            <div class="info-scenario-values"><span><b>8,5</b> W/m²</span><span><b>+4,4</b> °C</span></div>
+            <p>Předpokládá rychlý rozvoj založený na intenzivním využívání fosilních paliv a pokračujícím růstu emisí. Znamená vyšší riziko poklesu odtoku, dlouhodobého sucha a omezení zásobní funkce nádrží.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="info-section" aria-labelledby="infoModels">
+        <h3 id="infoModels">Použité klimatické modely</h3>
+        <div class="info-table-wrap">
+          <table class="info-model-table">
+            <thead><tr><th scope="col">Model</th><th scope="col">Země / oblast</th><th scope="col">Prostorové rozlišení</th></tr></thead>
+            <tbody>
+              <tr><td>CMCC-ESM2</td><td>Itálie</td><td>100 × 90 km</td></tr>
+              <tr><td>EC-Earth3</td><td>Evropa</td><td>80 km</td></tr>
+              <tr><td>GFDL-ESM4</td><td>USA</td><td>100 km</td></tr>
+              <tr><td>MPI-ESM1-2-HR</td><td>Německo</td><td>50 km</td></tr>
+              <tr><td>MRI-ESM2-0</td><td>Japonsko</td><td>60 km</td></tr>
+              <tr><td>TaiESM1</td><td>Tchaj-wan</td><td>100 km</td></tr>
+              <tr><td>ALADIN-Climate/CZ</td><td>Česká republika</td><td>2,3 × 2,3 km</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="info-note">Modely byly vybrány a zpracovány podle <a href="https://climateproofing.cz/images/2.1%20Metodika%20kombinovan%C3%A9ho%20sc%C3%A9n%C3%A1%C5%99e.pdf" target="_blank" rel="noopener noreferrer">Metodiky kombinovaného scénáře</a> na webu climateproofing.cz.</p>
+      </section>
+
+      <section class="info-section" aria-labelledby="infoAuthors">
+        <h3 id="infoAuthors">Autoři a kontakt</h3>
+        <p class="info-author-list">Roman Kožín, Martina Peláková, Jiří Prinz, Adam Vizina, Milena Forejtníková, Helena Nováková, Kateřina Sedláčková, Martin Caletka a Kateřina Kovářová.</p>
+        <p class="info-contact"><span>Kontaktní osoba</span><strong>Roman Kožín</strong><a href="mailto:roman.kozin@vuv.cz">roman.kozin@vuv.cz</a></p>
+        <p class="info-note">Podkladový popis zmiňuje také stažení hydrogeologického pasportu pomocí tlačítka „HG List“. Toto tlačítko zatím není v aktuální verzi geoportálu dostupné.</p>
+      </section>
+    </div>
+    <div class="info-foot"><span>Geoportál LAPV · projekt SS02030027</span><button id="infoDone" class="info-done" type="button">Zavřít informace</button></div>
+  </dialog>
   <dialog id="catalogDialog" class="catalog-dialog" aria-labelledby="catalogTitle">
     <div class="catalog-head">
       <div class="catalog-heading">

@@ -350,3 +350,27 @@ html, body { height:100%; width:100%; overflow:hidden; }
   .info-foot span{font-size:10px}
 }
 @media print{.info-dialog{display:none!important}}
+
+
+/* v1.8: HG pasport PDF viewer, loaded only on request */
+.hg-action{background:#e9f4f0;color:#176e63;border-color:#badbd1;font-weight:750}
+.hg-action:hover{background:#dcefe8}
+.hg-dialog{position:fixed;inset:0;margin:auto;padding:0;width:min(1050px,calc(100vw - 24px));max-width:1050px;height:min(850px,calc(100dvh - 24px));max-height:calc(100dvh - 24px);border:1px solid #d8e5ec;border-radius:15px;background:white;box-shadow:0 23px 75px #071e344d;color:#18384d;overflow:hidden}
+.hg-dialog[open]{display:flex;flex-direction:column}
+.hg-dialog::backdrop{background:rgba(8,24,39,.66);backdrop-filter:blur(3px)}
+.hg-head{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;gap:13px;padding:16px 21px;border-bottom:1px solid #e3edf1}
+.hg-heading{min-width:0}
+.hg-heading h2{font-size:21px;line-height:1.25;margin:5px 0 5px}
+.hg-toolbar{display:flex;flex:0 0 auto;align-items:center;gap:7px}
+.hg-link{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.hg-link[hidden],.hg-viewer[hidden],.hg-message[hidden]{display:none!important}
+.hg-download{background:#e9f4f0;color:#176e63;border-color:#badbd1;font-weight:700}
+.hg-body{flex:1;min-height:0;display:flex;flex-direction:column;background:#f4f8fa;padding:13px 18px}
+.hg-message{display:flex;min-height:210px;flex:1;justify-content:center;align-items:center;flex-direction:column;gap:11px;text-align:center;padding:30px;font-size:13px;color:#637f91;line-height:1.6}
+.hg-message strong{font-size:17px;color:#244b62}
+.hg-message span{max-width:500px}
+.hg-viewer{flex:1;min-height:0;display:flex;flex-direction:column;gap:7px}
+.hg-viewer iframe{display:block;flex:1;min-height:0;width:100%;border:1px solid #dbe6ed;border-radius:7px;background:#fff}
+.hg-viewer p{font-size:10.5px;line-height:1.4;margin:0;color:#758d9a}
+@media(max-width:750px){.hg-dialog{width:calc(100vw - 10px);height:calc(100dvh - 10px);max-height:calc(100dvh - 10px);border-radius:10px}.hg-head{padding:13px;align-items:flex-start;flex-wrap:wrap}.hg-heading h2{font-size:18px}.hg-toolbar{gap:5px;width:100%;justify-content:flex-start}.hg-toolbar .small-button{padding:8px;font-size:10px}.hg-toolbar .catalog-close{margin-left:auto}.hg-body{padding:8px}.hg-viewer p{font-size:10px}.map-actions{flex-wrap:wrap}}
+@media print{.hg-dialog{display:none!important}}

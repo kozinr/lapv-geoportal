@@ -346,6 +346,65 @@ async function openCatalog(id){
   }
 }
 function closeCatalog(){const dialog=$('catalogDialog');if(dialog.open)dialog.close();}
+
+// PDFs are stored under /pasporty as ID_Generel.pdf (e.g. 14.pdf).
+// PDF file is checked and fetched only when the visitor requests it.
+let hgRequestNumber=0;
+function closeHgList(){
+  hgRequestNumber++;
+  const dialog=$('hgDialog');
+  if(dialog?.open)dialog.close();
+  const frame=$('hgFrame');
+  if(frame)frame.removeAttribute('src');
+}
+async function openHgList(id){
+  const numeric=Number(id);
+  if(!Number.isSafeInteger(numeric) || numeric<=0)return;
+  const dialog=$('hgDialog');
+  const oldCatalog=$('catalogDialog');
+  if(oldCatalog.open)closeCatalog();
+  const oldInfo=$('infoDialog');
+  if(oldInfo.open)oldInfo.close();
+  const feature=state.geo.povodi?.features?.find(f=>Number(f.properties?.ID_Generel)===numeric)
+     ||state.geo.zatopy?.features?.find(f=>Number(f.properties?.ID_Generel)===numeric);
+  const locality=feature?nameOf(feature):`LAPV ${numeric}`;
+  $('hgId').textContent=`· ID ${numeric}`;
+  $('hgTitle').textContent=locality;
+  $('hgSubtitle').textContent='Hodnocení vlivu nádrže LAPV na podzemní vody';
+  const msg=$('hgMessage'), viewer=$('hgViewer'), frame=$('hgFrame');
+  const open=$('hgOpen'),download=$('hgDownload');
+  viewer.hidden=true;
+  frame.removeAttribute('src');
+  msg.hidden=false;
+  msg.className='hg-message';
+  msg.textContent='Ověřuji dostupnost hydrogeologického pasportu…';
+  open.hidden=true;download.hidden=true;
+  if(!dialog.open)dialog.showModal();
+  const request=++hgRequestNumber;
+  const url=`pasporty/${numeric}.pdf`;
+  try{
+    const response=await fetch(url,{method:'HEAD',cache:'no-store'});
+    if(request!==hgRequestNumber || !dialog.open)return;
+    if(!response.ok){
+      msg.classList.add('hg-missing');
+      msg.innerHTML=`<strong>Pasport zatím není k dispozici.</strong><span>Pro lokalitu ${safe(locality)} (ID ${numeric}) dosud nebyl zveřejněn dokument PDF. Jakmile bude přidán, zobrazí se zde automaticky.</span>`;
+      return;
+    }
+    open.href=url;
+    download.href=url;
+    download.download=`HG_LAPV_${numeric}.pdf`;
+    open.hidden=false;download.hidden=false;
+    msg.hidden=true;
+    viewer.hidden=false;
+    frame.src=url+'#toolbar=1&navpanes=0';
+  }catch(error){
+    if(request!==hgRequestNumber || !dialog.open)return;
+    msg.classList.add('hg-missing');
+    msg.innerHTML='<strong>Pasport se nepodařilo načíst.</strong><span>Zkontrolujte internetové připojení a zkuste to znovu.</span>';
+    console.warn('HG List:',error);
+  }
+}
+
 function downloadCatalogCsv(){
   const id=state.catalogId,hyd=state.hydrology?.records?.[id],future=state.climate?.records?.[id];
   if(!hyd||!future)return;
@@ -413,6 +472,11 @@ async function init(){
   els.showBand.addEventListener('change',renderPlot);els.showMean.addEventListener('change',renderPlot);
   document.querySelectorAll('#layerChecks input').forEach(i=>i.addEventListener('change',()=>{const layer=state.layers[i.dataset.layer];if(!layer)return;if(i.checked)layer.addTo(state.map);else state.map.removeLayer(layer);if(state.layers.povodi&&state.map.hasLayer(state.layers.povodi))highlight();if(state.layers.zatopy&&state.map.hasLayer(state.layers.zatopy))highlightZatopy();}));
   $('openCatalogButton').addEventListener('click',()=>openCatalog(state.selectedId));
+  $('openHgButton').addEventListener('click',()=>openHgList(state.selectedId));
+  $('catalogHg').addEventListener('click',()=>openHgList(state.catalogId));
+  $('hgClose').addEventListener('click',closeHgList);
+  $('hgDialog').addEventListener('click',e=>{if(e.target===$('hgDialog'))closeHgList();});
+  $('hgDialog').addEventListener('close',()=>{$('hgFrame').removeAttribute('src');hgRequestNumber++;});
   $('catalogClose').addEventListener('click',closeCatalog);
   $('catalogDownload').addEventListener('click',downloadCatalogCsv);
   $('catalogPrint').addEventListener('click',()=>window.print());
